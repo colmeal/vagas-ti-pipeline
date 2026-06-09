@@ -1,0 +1,77 @@
+version: "3.9"
+
+services:
+
+  postgres_vagas:
+    image: postgres:15
+    container_name: vagas_postgres_dados
+    environment:
+      POSTGRES_DB: vagas_db
+      POSTGRES_USER: vagas_user
+      POSTGRES_PASSWORD: vagas_pass
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vagas_user -d vagas_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_vagas_data:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  airflow:
+    image: apache/airflow:2.9.1-python3.11
+    container_name: vagas_airflow
+    restart: unless-stopped
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      PYTHONPATH: /opt/airflow/etl
+      _AIRFLOW_DB_MIGRATE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: admin
+      DB_HOST: postgres_vagas
+      DB_PORT: "5432"
+      DB_NAME: vagas_db
+      DB_USER: vagas_user
+      DB_PASSWORD: vagas_pass
+      CSV_PATH: /opt/airflow/data/job_postings.csv
+      JSON_PATH: /opt/airflow/data/stacks_map.json
+      REMOTIVE_LIMIT: "100"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./etl:/opt/airflow/etl
+      - ./data:/opt/airflow/data
+      - ./logs:/opt/airflow/logs
+    depends_on:
+      postgres_vagas:
+        condition: service_healthy
+    command: standalone
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: vagas_dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      DB_HOST: postgres_vagas
+      DB_PORT: "5432"
+      DB_NAME: vagas_db
+      DB_USER: vagas_user
+      DB_PASSWORD: vagas_pass
+    depends_on:
+      postgres_vagas:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_vagas_data:
