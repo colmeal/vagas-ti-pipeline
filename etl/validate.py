@@ -1,8 +1,7 @@
 """
 validate.py — Validações de qualidade de dados.
-Implementa as 3+ regras obrigatórias do enunciado:
+Implementa as 3+ regras:
 nulos, duplicidades, ranges, integridade.
-Padrão inspirado no src/dedup.py e src/metrics.py das aulas.
 """
 import logging
 from typing import Dict, Any
