@@ -1,0 +1,27 @@
+# Variáveis de ambiente (contém senhas e credenciais)
+.env
+
+# Logs do Airflow
+logs/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos temporários do pipeline
+data/tmp/
+
+# Dados gerados (opcional — remova se quiser versionar o CSV)
+# data/job_postings.csv
+
+# Volumes Docker
+postgres_data/
+
+# VS Code
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
