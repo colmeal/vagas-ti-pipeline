@@ -205,17 +205,29 @@ O dashboard Streamlit exibe:
 
 ### Screenshots
 
-![KPIs](assets/🏆%20Top%2015%20Tecnologias%20Mais%20Exigidas.png)
+**🏆 Top 15 Tecnologias Mais Exigidas**
 
-![Modalidade de Trabalho](assets/🌍%20Modalidade%20de%20Trabalho.png)
+![🏆 Top 15 Tecnologias Mais Exigidas](assets/🏆%20Top%2015%20Tecnologias%20Mais%20Exigidas.png)
 
-![Evolução de Vagas por Mês](assets/📈%20Evolução%20de%20Vagas%20por%20Mês.png)
+**🌍 Modalidade de Trabalho**
 
-![Distribuição por Senioridade](assets/👤%20Distribuição%20por%20Senioridade.png)
+![🌍 Modalidade de Trabalho](assets/🌍%20Modalidade%20de%20Trabalho.png)
 
-![Empresas com Mais Vagas](assets/🏢%20Empresas%20com%20Mais%20Vagas.png)
+**📈 Evolução de Vagas por Mês**
 
-![Salário Médio por Categoria](assets/💰%20Salário%20Médio%20por%20Categoria.png)
+![📈 Evolução de Vagas por Mês](assets/📈%20Evolução%20de%20Vagas%20por%20Mês.png)
+
+**👤 Distribuição por Senioridade**
+
+![👤 Distribuição por Senioridade](assets/👤%20Distribuição%20por%20Senioridade.png)
+
+**🏢 Empresas com Mais Vagas**
+
+![🏢 Empresas com Mais Vagas](assets/🏢%20Empresas%20com%20Mais%20Vagas.png)
+
+**💰 Salário Médio por Categoria**
+
+![💰 Salário Médio por Categoria](assets/💰%20Salário%20Médio%20por%20Categoria.png)
 
 ---
 
